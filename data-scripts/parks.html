@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<link href="styles.css" rel="stylesheet">
+	</head>
+<div class="topnav">
+  <a class="active" href="../index.html">&#x2190; Back</a>
+   <div class="new_div"><h1>{ Windsor : JSONified }</h1></div>
+</div>
+<div class="tablen"><h3>Parks-Data</h3></div>
+
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+    th{ 
+        color:#fff;
+            }
+</style>
+
+
+<table class="table table-striped">
+    <tr  class="bg-info">
+        <th>Park-Name</th>
+        <th>Address</th>
+    </tr>
+
+    <tbody id="myTable">
+        
+    </tbody>
+</table>
+
+<script>
+var myArray=[];
+//const proxyurl = "https://cors-anywhere.herokuapp.com/";
+const url = "http://18.222.31.238:1337/parks"; // site that doesn’t send Access-Control-*
+fetch(url) // https://cors-anywhere.herokuapp.com/https://example.com
+.then(response => response.text())
+.then(contents => {console.log(contents); myArray=JSON.parse(contents); buildTable(myArray)})
+.catch((err) => console.log("Can’t access " + url + " response. Blocked by browser? " + err))
+	
+	
+
+
+
+	function buildTable(data){
+		var table = document.getElementById('myTable')
+
+		for (var i = 0; i < myArray.length; i++){
+			var row = `<tr>
+							<td>${data[i].PARK_NAME}</td>
+							<td>${data[i].ADDRESS}</td>
+					  </tr>`
+			table.innerHTML += row
+
+
+		}
+	}
+
+</script>
